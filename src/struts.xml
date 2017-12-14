@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.ui.theme" value="simple" />
+	<constant name="struts.objectFactory.spring.autoWire" value="no" />
+
+	<package name="default" namespace="/" extends="struts-default">
+		<global-results>
+			<result name="error">/error.jsp</result>
+		</global-results>
+		<!-- 登录 -->
+		<action name="user_login" class="userAction" method="getUserLogin">
+			<result name="login" type="chain">bookInfo_list</result>
+		</action>
+		<!-- 注册 -->
+		<action name="user_add" class="userAction" method="addUser">
+			<result name="success">/login.jsp</result>
+		</action>
+		<!-- 分页显示图书信息 -->
+		<action name="bookInfo_list" class="bookInfoAction" method="findPage">
+			<result name="list">/bookInfoList.jsp</result>
+		</action>
+		<!-- 根据条件模糊查询 -->
+		<action name="bookInfo_likeType" class="bookInfoAction" method="findByType">
+			<result name="likeType" type="chain">bookInfo_list</result>
+		</action>
+		
+	</package>
+</struts>    
